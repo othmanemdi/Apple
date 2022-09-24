@@ -1,0 +1,38 @@
+.text-style {
+    color: orange
+}
+
+.active {
+    color: orange;
+    font-weight: bold;
+}
+
+.p {
+    color: rgb(129, 8, 32);
+    background-color: rgb(255, 232, 232);
+    font-weight: bold;
+    /* font-family: fantasy; */
+    /* font-family: 'Nabla', Arial, Helvetica, sans-serif; */
+    padding: 5mm;
+    margin: 1cm;
+    border: rgb(129, 8, 32) solid 0.5mm;
+    border-radius: 2mm;
+}
+
+
+.p:hover {
+    color: rgb(255, 232, 232);
+    background-color: rgb(129, 8, 32);
+    border: rgb(255, 232, 232) solid 0.5mm;
+    cursor: no-drop;
+
+}
+
+#text-pink {
+    color: pink
+}
+
+.required {
+    font-weight: bold;
+    color: red
+}
