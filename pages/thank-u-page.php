@@ -15,19 +15,23 @@ ob_start(); ?>
 
 ob_start(); ?>
 
-<h1>Thank you</h1>
+<div class="container mt-5">
 
-<div class="alert alert-success mb-3 text-center">
-    <h3>
-        Thank you for your purchase
-    </h3>
+
+    <h1>Thank you</h1>
+
+    <div class="alert alert-success mb-3 text-center">
+        <h3>
+            Thank you for your purchase
+        </h3>
+
+    </div>
+    <div class=" text-center">
+        <a href="shop" class="btn btn-lg btn-outline-dark fw-bold">Return to list of product</a>
+    </div>
 
 </div>
-<div class=" text-center">
-    <a href="shop" class="btn btn-lg btn-outline-dark fw-bold">Return to list of product</a>
-</div>
-
-
+<!-- container -->
 <?php $content_html = ob_get_clean();
 
 ob_start(); ?>

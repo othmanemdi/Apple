@@ -15,7 +15,11 @@ ob_start(); ?>
 
 ob_start(); ?>
 
-<h1>404</h1>
+<div class="container mt-5">
+    <h1>404</h1>
+
+</div>
+<!-- container -->
 
 
 <?php $content_html = ob_get_clean();
