@@ -8,8 +8,8 @@ if (isset($_GET['page']) && preg_match("/^[a-zA-Z0-9_-]*$/", $_GET['page'])) {
 
 $page_file = $page . ".php";
 
-require_once 'database/db.php';
 require_once 'Helpers/functions.php';
+require_once 'database/db.php';
 
 $admine_pages = scandir('admin/');
 $website_pages = scandir('pages/');
@@ -43,9 +43,12 @@ echo $content_php ?? "";
         </header>
         <main>
             <?php if (isset($_SESSION['color']) && isset($_SESSION['message'])) : ?>
-                <div class="alert alert-<?= $_SESSION['color'] ?>">
-                    <?= $_SESSION['message'] ?>
+                <div class="container mt-3">
+                    <div class="alert alert-<?= $_SESSION['color'] ?>">
+                        <?= $_SESSION['message'] ?>
+                    </div>
                 </div>
+                <!-- container -->
             <?php
                 unset($_SESSION['color']);
                 unset($_SESSION['message']);

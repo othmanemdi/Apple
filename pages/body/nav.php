@@ -31,7 +31,7 @@
                     <a href="cart" class="nav-link active me-2 position-relative">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="position-absolute top-75 start-100 translate-middle badge rounded-pill bg-danger">
-                            3
+                            <?= $total_cart_quantity ?>
                         </span>
                     </a>
                 </li>

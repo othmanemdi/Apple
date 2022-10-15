@@ -68,6 +68,40 @@ $produits = [
     ]
 ];
 
+$total_cart_quantity = $total_cart_price = 0;
+
+if (isset($_SESSION['cart_info'])) {
+    foreach ($_SESSION['cart_info'] as $key => $c) {
+        $total_cart_quantity += $c['produit_qt'];
+        $total_cart_price += $produits[$c['produit_id']]['price'] * $c['produit_qt'];
+    }
+}
+
+// unset($_SESSION['cart_info']);
+
+// $_SESSION['cart_info'][1]['produit_id'] = 1;
+// $_SESSION['cart_info'][1]['produit_qt'] = 3;
+
+// $_SESSION['cart_info'][2]['produit_id'] = 2;
+// $_SESSION['cart_info'][2]['produit_qt'] = 2;
+
+// $_SESSION['cart_info'][2]['produit_id'] = 3;
+// $_SESSION['cart_info'][2]['produit_qt'] = 2;
+// unset($_SESSION['cart_info'][2]);
+
+// $total_cart_session = count($_SESSION['cart_info']);
+// $_SESSION['cart_info'][$total_cart_session + 1]['produit_id'] = 3;
+// $_SESSION['cart_info'][$total_cart_session + 1]['produit_qt'] = 2;
+
+
+
+// $keys =  array_keys($_SESSION['cart_info']);
+// $max = max($keys);
+// $new_item = $max + 1;
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+// exit();
 
 // $produits = [];
 // $produits[1]['name'] = "Iphone 13 Pro Max";

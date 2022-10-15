@@ -57,9 +57,9 @@ ob_start(); ?>
 
                     <div class="d-flex mb-3">
                         <div class="me-auto p-2">
-                            <button class="btn btn-dark" name="login">
+                            <a href="dashboard" class="btn btn-dark" name="login">
                                 Connexion
-                            </button>
+                            </a>
                         </div>
                         <div class="p-2">
                             <a href="forgotpassword" class="text-dark">

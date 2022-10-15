@@ -3,7 +3,28 @@
 ob_start();
 
 $title = "Cart";
+// dd($_SESSION['cart_info']);
 
+if (isset($_SESSION['cart_info'])) {
+    $cart_info = $_SESSION['cart_info'];
+} else {
+    $_SESSION['color'] = "info";
+    $_SESSION['message'] = "Votre panier est vide !!!";
+    header('Location: shop');
+    exit();
+}
+
+if (isset($_POST['delete_item'])) {
+    $item = $_POST['item'];
+    unset($_SESSION['cart_info'][$item]);
+    $_SESSION['color'] = "info";
+    $_SESSION['message'] = "Bien supprimer !!!";
+    header('Location: cart');
+    exit();
+}
+
+
+// dd($cart_info);
 
 $content_php = ob_get_clean();
 
@@ -36,57 +57,67 @@ ob_start(); ?>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <img src="images/produits/1.jpg" width="40" alt="">
-                            </td>
-                            <th>
-                                Iphone 13 Pro Max Blue
-                            </th>
-                            <td>
-                                <input name="qt" type="number" class="form-control w-50" value="1">
-                            </td>
-                            <td>
-                                <div class="fw-bold">12 000,00 DH</div>
-                                <small>
-                                    <del class="fw-bold text-danger">13 500,00 DH</del>
-                                </small>
-                            </td>
-                            <td>
-                                <div class="fw-bold">12 000,00 DH</div>
-                            </td>
-                            <td>
-                                <a href="" class="fw-bold text-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        <?php
 
-                        <tr>
-                            <td>
-                                <img src="images/produits/2.jpg" width="40" alt="">
-                            </td>
-                            <th>
-                                Iphone 13 Pro Max Gold
-                            </th>
-                            <td>
-                                <input name="qt" type="number" class="form-control w-50" value="1">
-                            </td>
-                            <td>
-                                <div class="fw-bold">12 000,00 DH</div>
-                                <small>
-                                    <del class="fw-bold text-danger">13 500,00 DH</del>
-                                </small>
-                            </td>
-                            <td>
-                                <div class="fw-bold">12 000,00 DH</div>
-                            </td>
-                            <td>
-                                <a href="" class="fw-bold text-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        foreach ($cart_info as $key => $cart) :
+
+                            $produit_id = $cart['produit_id'];
+                            $produit_qt = $cart['produit_qt'];
+                            $produit_info = $produits[$produit_id];
+                            $price = $produit_info['price'];
+                            $total_price = $price * $produit_qt;
+                        ?>
+
+                            <tr>
+                                <td>
+                                    <img src="<?= $produit_info['image'] ?>" width="40" alt="">
+                                </td>
+                                <th>
+                                    <?= ucwords($produit_info['name'] . ' ' . $produit_info['color']) ?>
+                                </th>
+                                <td>
+
+
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-dark fw-bold btn-sm" type="button" id="button-addon1">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input name="qt" type="number" class="form-control text-center" value="<?= $produit_qt ?>">
+                                        <button class="btn btn-outline-dark fw-bold btn-sm" type="button" id="button-addon1">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="fw-bold">
+                                        <?= _number_format($price) ?>
+                                        DH</div>
+                                    <small>
+                                        <del class="fw-bold text-danger">
+                                            <?= _number_format($produit_info['old_price']) ?>
+                                            DH</del>
+                                    </small>
+                                </td>
+                                <td>
+                                    <div class="fw-bold">
+                                        <?= _number_format($total_price) ?>
+                                        DH</div>
+                                </td>
+                                <td>
+                                    <form method="post">
+
+                                        <input type="hidden" name="item" value="<?= $key ?>">
+
+                                        <button name="delete_item" type="submit" class="btn btn-outline-danger fw-bold ">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        <?php endforeach  ?>
                     </tbody>
                 </table>
             </div>
@@ -98,17 +129,20 @@ ob_start(); ?>
 
                 <h3 class="d-flex mb-3 fw-bold">
                     <div class="me-auto p-2">Total</div>
-                    <div class="p-2">24 000,00 DH</div>
+                    <div class="p-2">
+                        <?= _number_format($total_cart_price) ?>
+                        DH
+                    </div>
                 </h3>
                 <hr>
                 <div class="d-flex">
                     <div class="me-auto ">Items:</div>
-                    <div class="">3</div>
+                    <div class="fw-bold"><?= $total_cart_quantity ?></div>
                 </div>
 
                 <div class="d-flex">
                     <div class="me-auto ">Discount:</div>
-                    <div class=" text-danger">-200,00 DH</div>
+                    <div class="fw-bold text-danger">0,00 DH</div>
                 </div>
 
                 <div class="d-flex">

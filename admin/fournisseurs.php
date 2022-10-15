@@ -2,7 +2,7 @@
 
 ob_start();
 
-$title = "Commandes page";
+$title = "fournisseurs page";
 
 $content_php = ob_get_clean();
 
@@ -21,17 +21,19 @@ ob_start(); ?>
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Liste des commandes</h1>
+                <h1>Liste des fournisseurs</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="dashboard">Tableau de bord</a></li>
-                    <li class="breadcrumb-item active">Commandes</li>
+                    <li class="breadcrumb-item active">Coupons</li>
                 </ol>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
+
 
 <!-- Main content -->
 <section class="content">
@@ -39,7 +41,7 @@ ob_start(); ?>
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Liste des commandes</h3>
+            <h3 class="card-title">Liste des fournisseurs</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -50,12 +52,12 @@ ob_start(); ?>
         </div>
         <div class="card-body">
 
-            <div class="responsive">
+            <!-- <div class="responsive">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th>Num</th>
-                            <th>Client</th>
+                            <th>Img</th>
+                            <th>Nom</th>
                             <th>Date de commande</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -87,7 +89,7 @@ ob_start(); ?>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
         <!-- /.card-body -->
 
@@ -96,6 +98,7 @@ ob_start(); ?>
 
 </section>
 <!-- /.content -->
+
 
 
 <?php $content_html = ob_get_clean();

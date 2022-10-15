@@ -4,6 +4,16 @@ ob_start();
 
 $title = "Proced To Checkout";
 
+
+if (isset($_SESSION['cart_info'])) {
+    $cart_info = $_SESSION['cart_info'];
+} else {
+    $_SESSION['color'] = "info";
+    $_SESSION['message'] = "Votre panier est vide !!!";
+    header('Location: shop');
+    exit();
+}
+
 $content_php = ob_get_clean();
 
 ob_start(); ?>
@@ -30,67 +40,27 @@ ob_start(); ?>
 
                     <form class="row g-3">
                         <div class="col-md-4">
-                            <label for="validationServer01" class="form-label">First name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name:" required>
+
                         </div>
+
                         <div class="col-md-4">
-                            <label for="validationServer02" class="form-label">Last name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <label for="phone" class="form-label">Phone:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone:" required>
                         </div>
+
                         <div class="col-md-4">
-                            <label for="validationServerUsername" class="form-label">Username</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                                <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
-                                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
-                            </div>
+                            <label for="ciy" class="form-label">City:</label>
+                            <input type="text" class="form-control" id="ciy" name="ciy" placeholder="City:" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="validationServer03" class="form-label">City</label>
-                            <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                Please provide a valid city.
-                            </div>
+
+                        <div class="col-md-12">
+                            <label for="adresse" class="form-label">Adresse:</label>
+
+                            <textarea class="form-control" name="adresse" id="adresse" cols="30" rows="10" placeholder="Your adresse please:"></textarea>
                         </div>
-                        <div class="col-md-3">
-                            <label for="validationServer04" class="form-label">State</label>
-                            <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option>...</option>
-                            </select>
-                            <div id="validationServer04Feedback" class="invalid-feedback">
-                                Please select a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="validationServer05" class="form-label">Zip</label>
-                            <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
-                            <div id="validationServer05Feedback" class="invalid-feedback">
-                                Please provide a valid zip.
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-                                <label class="form-check-label" for="invalidCheck3">
-                                    Agree to terms and conditions
-                                </label>
-                                <div id="invalidCheck3Feedback" class="invalid-feedback">
-                                    You must agree before submitting.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-dark" type="submit">Submit form</button>
-                        </div>
+
                     </form>
 
 
@@ -109,46 +79,44 @@ ob_start(); ?>
 
                 <h3 class="d-flex mb-3 fw-bold">
                     <div class="me-auto p-2">Total</div>
-                    <div class="p-2">24 000,00 DH</div>
+                    <div class="p-2"><?= _number_format($total_cart_price) ?> DH</div>
                 </h3>
                 <hr>
 
                 <ul class="list-group mb-2">
-                    <li class="list-group-item bg-transparent">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <img src="images/produits/1.jpg" width="50" alt="...">
-                            </div>
-                            <div class="flex-grow-1 ms-3 fw-bold">
-                                Iphone 13 MAX PRO BLUE
-                                <h6>
-                                    <div class="fw-bold">12 000,00 DH</div>
-                                    <small>
-                                        <del class="fw-bold text-danger">13 500,00 DH</del>
-                                    </small>
-                                </h6>
-                            </div>
-                        </div>
-                    </li>
 
-                    <li class="list-group-item bg-transparent">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <img src="images/produits/2.jpg" width="50" alt="...">
+                    <?php
+
+                    foreach ($cart_info as $key => $cart) :
+
+                        $produit_id = $cart['produit_id'];
+                        $produit_qt = $cart['produit_qt'];
+                        $produit_info = $produits[$produit_id];
+                        $price = $produit_info['price'];
+                        $total_price = $price * $produit_qt;
+                    ?>
+
+                        <li class="list-group-item bg-transparent">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="<?= $produit_info['image'] ?>" width="50" alt="...">
+                                </div>
+                                <div class="flex-grow-1 ms-3 fw-bold">
+                                    <?= ucwords($produit_info['name'] . ' ' . $produit_info['color']) ?>
+                                    <h6>
+                                        <div class="fw-bold"> <?= _number_format($price) ?> DH</div>
+                                        <small>
+                                            <del class="fw-bold text-danger"><?= _number_format($produit_info['old_price']) ?> DH</del>
+                                        </small>
+                                    </h6>
+                                </div>
                             </div>
-                            <div class="flex-grow-1 ms-3 fw-bold">
-                                Iphone 13 MAX PRO GOLD
-                                <h6>
-                                    <div class="fw-bold">12 000,00 DH</div>
-                                    <small>
-                                        <del class="fw-bold text-danger">13 500,00 DH</del>
-                                    </small>
-                                </h6>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+
+                    <?php endforeach  ?>
+
+
                 </ul>
-
 
 
 
@@ -159,17 +127,17 @@ ob_start(); ?>
 
                 <div class="d-flex">
                     <div class="me-auto ">Items:</div>
-                    <div class="">3</div>
+                    <div class="fw-bold"><?= $total_cart_quantity ?></div>
                 </div>
 
                 <div class="d-flex">
                     <div class="me-auto ">Discount:</div>
-                    <div class=" text-danger">-200,00 DH</div>
+                    <div class="fw-bold text-danger">0,00 DH</div>
                 </div>
 
                 <div class="d-flex">
                     <div class="me-auto ">Shipping Cost:</div>
-                    <div class=" fw-bold">Free</div>
+                    <div class="fw-bold">Free</div>
                 </div>
 
                 <a href="thank-u-page" class="btn btn-dark btn-md fw-bold mt-3">Confirme Your Order</a>

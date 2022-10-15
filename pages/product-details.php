@@ -97,9 +97,9 @@ ob_start(); ?>
 
 
                 <h3>
-                    <span class="fw-bold"><?= $p['price'] ?> DH</span>
+                    <span class="fw-bold"><?= _number_format($p['price']) ?> DH</span>
                     <small>
-                        <del class="fw-bold text-danger"><?= $p['old_price'] ?> DH</del>
+                        <del class="fw-bold text-danger"><?= _number_format($p['old_price']) ?> DH</del>
                     </small>
                 </h3>
 
