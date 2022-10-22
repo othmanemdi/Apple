@@ -2,19 +2,49 @@
 
 ob_start();
 
+
 $title = "Shop";
 // dd($_SESSION['cart_info']);
-
 
 if (isset($_POST['add_to_cart'])) {
     $produit_id = $_POST['produit_id'];
     $produit_qt = 1;
     $cart_info = $_SESSION['cart_info'];
 
-    $last_item = 0;
-    foreach ($_SESSION['cart_info'] as $key => $cart_test) {
-        $last_item = ++$key;
+    $check_if_product_id_exist = 0;
+    foreach ($cart_info as $key => $c) {
+        if ($c['produit_id'] == $produit_id) {
+            $check_if_product_id_exist = $key;
+            break;
+        }
     }
+
+    $last_item = empty($cart_info) ? 1 : max(array_keys($cart_info)) + 1;
+
+    if ($check_if_product_id_exist) {
+        // echo 'Modifier le produit ' . $produit_id;
+        // $qt_produit = $_SESSION['cart_info'][$check_if_product_id_exist]['produit_qt'];
+        // $_SESSION['cart_info'][$check_if_product_id_exist]['produit_qt'] = $qt_produit + 1;
+        $_SESSION['cart_info'][$check_if_product_id_exist]['produit_qt'] += 1;
+    } else {
+        // echo 'Ajouter ';
+        $_SESSION['cart_info'][$last_item]['produit_id'] = $produit_id;
+        $_SESSION['cart_info'][$last_item]['produit_qt'] = $produit_qt;
+    }
+    // exit();
+
+    // if (empty($cart_info)) {
+    //     $last_item = 1;
+    // } else {
+    //     $last_item = max(array_keys($cart_info)) + 1;
+    // }
+
+    // $last_item = 0;
+    // foreach ($_SESSION['cart_info'] as $key => $cart_test) {
+    //     $last_item = ++$key;
+    // }
+
+
     // dd($_SESSION['cart_info']);
 
     // if (isset($_SESSION['cart_info'])) {
@@ -27,8 +57,11 @@ if (isset($_POST['add_to_cart'])) {
     // $last_item = $_SESSION['cart_info'];
     // dd($last_item);
 
-    $_SESSION['cart_info'][$last_item + 1]['produit_id'] = $produit_id;
-    $_SESSION['cart_info'][$last_item + 1]['produit_qt'] = $produit_qt;
+
+
+
+
+
 
     $_SESSION['color'] = "success";
     $_SESSION['message'] = "Bien ajouter";
@@ -64,7 +97,7 @@ ob_start(); ?>
 
 
 
-    <h1 class="my-4">Shop Page</h1>
+    <!-- <h1 class="my-4">Shop Page</h1> -->
 
 
     <div class="row">

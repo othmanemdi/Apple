@@ -1,5 +1,116 @@
 <?php
 
+
+// if (isset($_COOKIE['stagiaire'])) {
+//     echo $_COOKIE['stagiaire'];
+// } {
+//     // setcookie('stagiaire', 'Hind', time() + 60 * 60 * 24 * 365);
+// }
+
+
+
+// dd($categories);
+
+// $categorie_json = json_encode($categories);
+
+// dd($categorie_json);
+
+// exit();
+
+// setcookie('categories', $categorie_json, time() + 60 * 60 * 24 * 365);
+
+// $categorie_json_decode = json_decode($_COOKIE['categories'], true);
+// dd($categorie_json_decode);
+
+
+$categories = [
+    1 => "téléphones",
+    "tablettes",
+    "pc-portable",
+    "pc bureaux",
+    "montres",
+];
+
+$colors = [
+    1 => "red",
+    "black",
+    "gold",
+    "blue",
+    "pink",
+    "gray",
+    "orange",
+];
+
+
+$produits = [
+    1 => [
+        "image" => "images/produits/1.jpg",
+        "name" => "Iphone 13 Pro Max",
+        "price" => 12000,
+        "old_price" => 13500,
+        "color" => $colors[4],
+        "category" => $categories[1],
+    ],
+    [
+        "image" => "images/produits/2.jpg",
+        "name" => "Iphone 13 Pro Max",
+        "price" => 12000,
+        "old_price" => 13500,
+        "color" => $colors[3],
+        "category" => $categories[1],
+    ],
+    [
+        "image" => "images/produits/3.jpg",
+        "name" => "Imac ",
+        "price" => 24000,
+        "old_price" => 24500,
+        "color" => $colors[5],
+        "category" => $categories[4],
+    ],
+    [
+        "image" => "images/produits/4.jpg",
+        "name" => "Imac ",
+        "price" => 24000,
+        "old_price" => 24500,
+        "color" => $colors[6],
+        "category" => $categories[4],
+    ], [
+        "image" => "images/produits/5.jpg",
+        "name" => "Imac ",
+        "price" => 24000,
+        "old_price" => 24500,
+        "color" => $colors[4],
+        "category" => $categories[4],
+    ],
+    [
+        "image" => "images/produits/6.jpg",
+        "name" => "Imac ",
+        "price" => 24000,
+        "old_price" => 24500,
+        "color" => $colors[7],
+        "category" => $categories[4],
+    ]
+];
+
+
+$produits_json = json_encode($produits);
+// echo $produits_json;
+
+
+// setcookie('produits', $produits_json, time() + 60 * 60 * 24 * 365);
+
+$produits_json_decode = json_decode($_COOKIE['produits'], true);
+dd($produits_json_decode);
+
+
+exit();
+// unset($_COOKIE['stagiaire']);
+
+
+
+
+exit();
+
 $categories = [
     1 => "téléphones",
     "tablettes",

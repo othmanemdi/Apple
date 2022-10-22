@@ -5,7 +5,7 @@ ob_start();
 $title = "Cart";
 // dd($_SESSION['cart_info']);
 
-if (isset($_SESSION['cart_info'])) {
+if (count($_SESSION['cart_info']) > 0) {
     $cart_info = $_SESSION['cart_info'];
 } else {
     $_SESSION['color'] = "info";
@@ -17,7 +17,7 @@ if (isset($_SESSION['cart_info'])) {
 if (isset($_POST['delete_item'])) {
     $item = $_POST['item'];
     unset($_SESSION['cart_info'][$item]);
-    $_SESSION['color'] = "info";
+    $_SESSION['color'] = "success";
     $_SESSION['message'] = "Bien supprimer !!!";
     header('Location: cart');
     exit();
@@ -69,6 +69,9 @@ ob_start(); ?>
                         ?>
 
                             <tr>
+                                <td>
+                                    <?= $key ?>
+                                </td>
                                 <td>
                                     <img src="<?= $produit_info['image'] ?>" width="40" alt="">
                                 </td>

@@ -8,7 +8,7 @@ function dd($array): void
     echo '<pre>';
     print_r($array);
     echo '</pre>';
-    exit();
+    // exit();
 }
 
 // number_format($total, 2, ',', ' ')
